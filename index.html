@@ -57,12 +57,23 @@
         gapi.client.load('calendar', 'v3', listUpcomingEvents);
       }
 
+      /** 
+       * List all all the calendars for the user account
+       * 
+       */
+      function listCalendars() {
+      	var request = gapi.client.calendarList();
+      	request.execute(function(resp) {
+      		console.log(resp);
+      	}
+      }
       /**
        * Print the summary and start datetime/date of the next ten events in
        * the authorized user's calendar. If no events are found an
        * appropriate message is printed.
        */
       function listUpcomingEvents() {
+      	listCalendars();
         var request = gapi.client.calendar.events.list({
           'calendarId': 'primary',
           'timeMin': (new Date()).toISOString(),
