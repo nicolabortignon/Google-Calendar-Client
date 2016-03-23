@@ -1,5 +1,8 @@
 <html>
   <head>
+         <script src="calendarAPI.js">
+
+    </script>
     <script type="text/javascript">
       // Your Client ID can be retrieved from your project in the Google
       // Developer Console, https://console.developers.google.com
@@ -7,16 +10,15 @@
 
       var SCOPES = ["https://www.googleapis.com/auth/calendar"];
 
+
+      var capi = new calendarAPI('207659534457-m1kprlk0c7staqgru790n6j504atps1c.apps.googleusercontent.com');
+
+
       /**
        * Check if current user has authorized this application.
        */
       function checkAuth() {
-        gapi.auth.authorize(
-          {
-            'client_id': CLIENT_ID,
-            'scope': SCOPES.join(' '),
-            'immediate': true
-          }, handleAuthResult);
+        capi.startAuthentication().then(function(data){console.log(data)});
       }
 
       /**
@@ -62,10 +64,10 @@
        * 
        */
       function listCalendars() {
-      	var request = gapi.client.calendarList();
+      	var request = gapi.client.calendar.calendarList.list();
       	request.execute(function(resp) {
       		console.log(resp);
-      	}
+      	});
       }
       /**
        * Print the summary and start datetime/date of the next ten events in
@@ -115,7 +117,7 @@
         pre.appendChild(textContent);
       }
 
-    </script>
+    </script> 
     <script src="https://apis.google.com/js/client.js?onload=checkAuth">
     </script>
   </head>
