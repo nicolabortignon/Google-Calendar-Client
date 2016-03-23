@@ -5,7 +5,8 @@ var calendarAPI = (function() {
   // Developer Console, https://console.developers.google.com
   var _clientId = '';
   // Represents the scope in the gApi that you are requesting permission for.
-  // In this case we want to have read/write permission on the calendar endpoint.
+  // In this case we want to have read/write permission on the calendar 
+ 	// endpoint.
   var SCOPES = ["https://www.googleapis.com/auth/calendar"];
 
   var Constr = function(clientId) {
@@ -19,9 +20,8 @@ var calendarAPI = (function() {
   };
   /**
    * Control if the current application (domain) has been authenticated before.
-   * @param {string} url The URL to be fetched
-   * @param {function(Object,Object)} callback An optional callback
-   * @return {Object} Null if a callback is provided, a `Promise` object otherwise
+	 * @return Promise{Object} Null if there has not been autenticatio, the 
+	 * 		authentication object otherwise.
    */
   Constr.prototype.isAuthenticated = function() {
     return new Promise(function(resolve,reject){
@@ -57,6 +57,7 @@ var calendarAPI = (function() {
       );
     });
   }
+  
   return Constr;
 })();
 
