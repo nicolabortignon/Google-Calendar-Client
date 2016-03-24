@@ -11,14 +11,21 @@
       var SCOPES = ["https://www.googleapis.com/auth/calendar"];
 
 
-      var capi = new calendarAPI('207659534457-m1kprlk0c7staqgru790n6j504atps1c.apps.googleusercontent.com');
+      var capi = new calendarAPI(CLIENT_ID);
 
 
       /**
        * Check if current user has authorized this application.
        */
       function checkAuth() {
-        capi.startAuthentication().then(function(data){console.log(data)});
+        capi.isAuthenticated().
+          then(capi.startAuthentication).
+          then(capi.initializeCalendarAPI).
+          then(capi.getEvents).
+          then(capi.getMyCalendars).
+          then(function(result){ 
+                console.log(result);
+              });
       }
 
       /**
