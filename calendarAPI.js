@@ -134,10 +134,14 @@ var calendarAPI = (function() {
     });
   }
   
-  Constr.prototype.getEvents = function(opt) {
-    if(!opt) opt = {};
+  Constr.prototype.getEvents = function(calendarId) {
+    if(!calendarId) calendarId = 'primary';
     return new Promise(function(resolve,reject){
-      gapi.client.calendar.events.list(opt).execute(
+      gapi.client.calendar.events.list({
+          calendarId:'primary', 
+          timeMin: (new Date()).toISOString(),
+          singleEvent: true
+        }).execute(
         function(result){
           if (result && !result.error) {
             resolve(result.result);

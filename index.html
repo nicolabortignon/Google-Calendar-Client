@@ -21,11 +21,8 @@
         capi.isAuthenticated().
           then(capi.startAuthentication).
           then(capi.initializeCalendarAPI).
-          then(capi.getEvents.bind(null, {
-            calendarId: 'primary', 
-            timeMin: (new Date()).toISOString(),
-            singleEvent: true
-          })).
+          then(capi.getEvents).
+          then(capi.getMyCalendars).
           then(function(result){ 
                 console.log(result);
               });
